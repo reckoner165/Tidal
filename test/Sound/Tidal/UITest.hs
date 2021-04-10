@@ -213,6 +213,12 @@ run =
         compareP (Arc 0 1)
           (euclidFull 3 8 "bd" silence)
           ("bd(3,8)" :: Pattern String)
+    
+    describe "necklace" $ do
+      it "can lace two patterns" $ do 
+        compareP (Arc 0 1)
+          (necklace 4 "X" "x" [3,2,5,7])
+          ("X x x X x X x x x x X x x x x x x" :: Pattern String)
 
     describe "snowball" $ do
       let testPattern = ("1 2 3 4"::Pattern Int)

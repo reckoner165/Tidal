@@ -812,6 +812,14 @@ index sz indexpat pat =
   where
     zoom' tSz s = zoomArc (Arc s (s+tSz))
 
+necklace :: Rational -> Pattern a -> Pattern a -> [Int] -> Pattern a
+necklace perCycle a b xs = sew boolStep a b
+  where boolStep :: Pattern Bool
+        boolStep = _slow ((toRational $ sum xs) / perCycle) $ listToPat $ list xs
+        list :: [Int] -> [Bool]
+        list [] = []
+        list (x:xs) = (True:(replicate (x-1) False)) ++ list xs
+
 {-
 -- | @prrw f rot (blen, vlen) beatPattern valuePattern@: pattern rotate/replace.
 prrw :: (a -> b -> c) -> Int -> (Time, Time) -> Pattern a -> Pattern b -> Pattern c
